@@ -1,0 +1,4 @@
+volumes/mosquitto/data/mosquitto.db
+volumes/grafana/data/grafana.db
+volumes/nodered/data/.npm/_logs/2023-01-03T14_15_55_449Z-debug-0.log
+volumes/influxdb/data/meta/meta.db

@@ -25,6 +25,12 @@ microk8s enable ingress
 # enable the metrics server
 microk8s enable metrics-server
 
+# 
+microk8s.kubectl config view --raw > $HOME/.kube/config
+
+# create the namespace iotstack
+microk8s kubectl create namespace iotstack
+
 # check if skaffold is installed and install it if not
 if ! command -v skaffold &> /dev/null
 then
