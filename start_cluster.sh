@@ -8,7 +8,7 @@
 microk8s start
 
 # enable the registry
-microk8s enable registry --size 20Gi
+sudo microk8s enable registry:size=20Gi
 
 # enable the dns
 microk8s enable dns
