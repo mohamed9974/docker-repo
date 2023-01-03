@@ -93,7 +93,7 @@ services:
 
   qemu-rpi-os-sensor:
     container_name: qemu-rpi-os-sensor
-    image: docker pull ghcr.io/mohamed9974/rpi-os-custom-image-with-sensors/qemu-rpi-os-sensor:latest
+    image: ghcr.io/mohamed9974/rpi-os-custom-image-with-sensors/qemu-rpi-os-sensor:latest
     restart: unless-stopped
     ports:
       - "5022:5022"

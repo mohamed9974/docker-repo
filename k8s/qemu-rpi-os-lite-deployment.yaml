@@ -25,7 +25,7 @@ spec:
         io.kompose.service: qemu-rpi-os-sensor
     spec:
       containers:
-        - image: docker pull ghcr.io/mohamed9974/rpi-os-custom-image-with-sensors/qemu-rpi-os-sensor:latest
+        - image: ghcr.io/mohamed9974/rpi-os-custom-image-with-sensors/qemu-rpi-os-sensor:latest
           name: qemu-rpi-os-sensor
           ports:
             - containerPort: 5022
