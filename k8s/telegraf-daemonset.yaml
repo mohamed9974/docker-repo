@@ -1,0 +1,60 @@
+# this is a template for the telegraf daemonset that will be deployed to the cluster to collect metrics from the nodes and pods in the cluster and send them to influxdb for storage and visualization in grafana
+# the influxdb and grafana services are deployed separately and are not part of this template file
+# influxdb is running in a separate pod and grafana is running in a separate pod as well
+# influxdb is running as a service in the cluster with a service name of influxdb
+# grafana is running as a service in the cluster with a service name of grafana
+
+apiVersion: extensions/v1beta1
+kind: DaemonSet
+metadata:
+  name: telegraf
+  namespace: kube-system
+  labels:
+    k8s-app: telegraf
+spec:
+  template:
+    metadata:
+      labels:
+        k8s-app: telegraf
+    spec:
+      containers:
+      - name: telegraf
+        image: telegraf:1.2.1
+        imagePullPolicy: Always
+        command: ["/bin/sh", "-c"]
+        args: ["telegraf -config /etc/telegraf/telegraf.conf -config-directory /etc/telegraf/telegraf.d"]
+        volumeMounts:
+        - name: etc
+          mountPath: /etc/telegraf
+        - name: proc
+          mountPath: /host/proc
+          readOnly: true
+        - name: sys
+          mountPath: /host/sys
+          readOnly: true
+        - name: docker-socket
+          mountPath: /var/run/docker.sock
+        - name: cgroup
+          mountPath: /host/cgroup
+          readOnly: true
+      volumes:
+      - name: etc
+        configMap:
+          name: telegraf
+      - name: proc
+        hostPath:
+          path: /proc
+      - name: sys
+        hostPath:
+          path: /sys
+      - name: docker-socket
+        hostPath:
+          path: /var/run/docker.sock
+      - name: cgroup
+        hostPath:
+          path: /cgroup
+      hostNetwork: true
+      hostPID: true
+      tolerations:
+      - key: node-role.kubernetes.io/master
+        effect: NoSchedule
