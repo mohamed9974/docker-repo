@@ -1,4 +1,4 @@
-# ai4iot
+# ai3iot
 
 a monitoring solution for iot devices
 
