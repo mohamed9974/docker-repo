@@ -4,28 +4,6 @@
 # it also assumes that the user has access to the
 # docker registry
 
-# start the cluster
-
-## enable the registry
-#sudo microk8s enable registry:size=20Gi
-
-## enable the dns
-#microk8s enable dns
-
-## enable the dashboard
-#microk8s enable dashboard
-
-## enable the storage
-#microk8s enable storage
-
-## enable the ingress
-#microk8s enable ingress
-
-## enable the metrics server
-#microk8s enable metrics-server
-
-## 
-#microk8s.kubectl config view --raw > $HOME/.kube/config
 
 ## create the namespace iotstack
 kubectl create namespace iotstack
