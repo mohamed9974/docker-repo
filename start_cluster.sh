@@ -3,11 +3,12 @@
 # and that the user has access to the cluster
 # it also assumes that the user has access to the
 # docker registry
-
+kubectl config use-context kind-kind
 
 ## create the namespace iotstack
 kubectl create namespace iotstack
 kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.13.7/config/manifests/metallb-native.yaml
+kubectl apply -f ./k8s/metalb.yml
 # check if skaffold is installed and install it if not
 if ! command -v skaffold &> /dev/null
 then

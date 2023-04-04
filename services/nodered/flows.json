@@ -1,0 +1,138 @@
+[
+    {
+        "id": "7f9f5cf6761ae2ed",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "5136257a78d6a9da",
+        "type": "influxdb out",
+        "z": "7f9f5cf6761ae2ed",
+        "influxdb": "d068d7c85a8ea931",
+        "name": "influx",
+        "measurement": "sensor_data",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "organisation",
+        "bucket": "bucket",
+        "x": 1130,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "4f1d08764bd118c0",
+        "type": "mqtt in",
+        "z": "7f9f5cf6761ae2ed",
+        "name": "sensor",
+        "topic": "/sensors",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "b526800a4b5828c1",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 350,
+        "y": 400,
+        "wires": [
+            [
+                "311b53bf5c9bc5fd",
+                "22da797a37251813"
+            ]
+        ]
+    },
+    {
+        "id": "311b53bf5c9bc5fd",
+        "type": "change",
+        "z": "7f9f5cf6761ae2ed",
+        "name": "transformer",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\t    \"temperature\": msg.payload.temperature,\t    \"humidity\": msg.payload.humidity,\t    \"humidity_ratio\": msg.payload.humidity_ratio,\t    \"CO2\": msg.payload.CO2,\t    \"light\": msg.payload.light,\t    \"occupancy\": msg.payload.occupancy\t}\t \t        ",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 830,
+        "y": 400,
+        "wires": [
+            [
+                "5136257a78d6a9da",
+                "22da797a37251813"
+            ]
+        ]
+    },
+    {
+        "id": "22da797a37251813",
+        "type": "debug",
+        "z": "7f9f5cf6761ae2ed",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1140,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "d068d7c85a8ea931",
+        "type": "influxdb",
+        "hostname": "influxdb",
+        "port": "80",
+        "protocol": "http",
+        "database": "sensor_data",
+        "name": "influx node",
+        "usetls": false,
+        "tls": "",
+        "influxdbVersion": "1.x",
+        "url": "http://localhost:8086",
+        "rejectUnauthorized": true
+    },
+    {
+        "id": "b526800a4b5828c1",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "mqtt://mosquitto",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    }
+]
